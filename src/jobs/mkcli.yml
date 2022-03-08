@@ -1,17 +1,9 @@
-version: 2.1
-
 description: >
   MuukTest Executor
   Users will be able to use MuukTest executor on Circle CI integrations
 
-display:
-  home_url: "https://www.muuktest.com/"
-  source_url: "https://github.com/napoles-mk-org/muuktest-orb"
-
 docker:
   - image: gebish/ci:v7
-    GRADLE_OPTS: -Xmx1024m -XX:MaxMetaspaceSize=256m
-    GRADLE_USER_HOME: .gradle-home
 
 parameters:
   p:
