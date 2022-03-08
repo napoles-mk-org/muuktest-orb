@@ -1,4 +1,4 @@
-# Jobs
+# Jobs Example
 
 Easily author and add [Parameterized Jobs](https://circleci.com/docs/2.0/reusing-config/#authoring-parameterized-jobs) to the `src/jobs` directory.
 
