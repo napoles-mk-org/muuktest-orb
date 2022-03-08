@@ -31,22 +31,22 @@ parameters:
 
 steps:
   - checkout # check out the code in the project directory
-  - run: 
+  - run:
       command: |
         apt-get update
         apt-get install -y software-properties-common
         apt-get install -y tmux
         apt-get install -y ffmpeg
-  - run: 
+  - run:
       command: |
         yes "" | add-apt-repository ppa:deadsnakes/ppa || true
         apt-get update
         apt install python3.7 -y
   - run: curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
-  - run: python3.7 get-pip.py 
-  - run:  pip3 install requests
+  - run: python3.7 get-pip.py
+  - run: pip3 install requests
   - run: pip install Pillow
-  - run: 
+  - run:
       command: |
         wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
         dpkg -i google-chrome-stable_current_amd64.deb
@@ -64,10 +64,10 @@ steps:
         cd executor/
         git checkout videoEnabled
         ls
-        printf $muuk_key > key.pub 
+        printf $muuk_key > key.pub
         cat key.pub
-        chmod 755 gradlew 
-        chmod 755 key.pub 
+        chmod 755 gradlew
+        chmod 755 key.pub
         sed -i 's/79.0.3945.36/85.0.4183.87/g' build.gradle
         cat build.gradle
         python3.7 mkcli.py -p << parameters.p >> -t << parameters.t >> -browser << parameters.browser >>
