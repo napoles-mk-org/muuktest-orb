@@ -10,7 +10,6 @@ display:
 
 docker:
   - image: gebish/ci:v7
-  
     GRADLE_OPTS: -Xmx1024m -XX:MaxMetaspaceSize=256m
     GRADLE_USER_HOME: .gradle-home
 
@@ -32,36 +31,30 @@ parameters:
 
 steps:
   - checkout # check out the code in the project directory
-  
   - run: 
       command: |
         apt-get update
         apt-get install -y software-properties-common
         apt-get install -y tmux
         apt-get install -y ffmpeg
-      
   - run: 
       command: |
         yes "" | add-apt-repository ppa:deadsnakes/ppa || true
         apt-get update
         apt install python3.7 -y
-
   - run: curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
   - run: python3.7 get-pip.py 
   - run:  pip3 install requests
   - run: pip install Pillow
-
   - run: 
       command: |
         wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
         dpkg -i google-chrome-stable_current_amd64.deb
-
   - run: python3.7 --version
   - run: google-chrome -version
   - run: firefox -version
   - run: tmux -V
   - run: ffmpeg -version
-
   - run:
       command: |
         Xvfb :99 -screen 0 1366x768x16 -nolisten tcp -fbdir /var/run > /dev/null 2>&1 &
@@ -78,4 +71,3 @@ steps:
         sed -i 's/79.0.3945.36/85.0.4183.87/g' build.gradle
         cat build.gradle
         python3.7 mkcli.py -p << parameters.p >> -t << parameters.t >> -browser << parameters.browser >>
-
