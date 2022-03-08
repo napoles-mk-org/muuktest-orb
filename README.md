@@ -1,6 +1,6 @@
 # Orb Project Template
 
-[![CircleCI Build Status](https://circleci.com/gh/napoles-mk-org/muuktest-orb.svg?style=shield "CircleCI Build Status")](https://circleci.com/gh/napoles-mk-org/muuktest-orb) [![CircleCI Orb Version](https://badges.circleci.com/orbs/napoles-mk/muuktest.svg)](https://circleci.com/orbs/registry/orb/napoles-mk/muuktest) [![GitHub License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/napoles-mk-org/muuktest-orb/master/LICENSE) [![CircleCI Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/orbs)
+[![CircleCI Build Status](https://circleci.com/gh/napoles-mk/muuktest-orb.svg?style=shield "CircleCI Build Status")](https://circleci.com/gh/napoles-mk/muuktest-orb) [![CircleCI Orb Version](https://badges.circleci.com/orbs/napoles-mk/muuktest.svg)](https://circleci.com/orbs/registry/orb/napoles-mk/muuktest) [![GitHub License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/napoles-mk/muuktest-orb/master/LICENSE) [![CircleCI Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/orbs)
 
 
 
@@ -17,7 +17,7 @@ Additional READMEs are available in each directory.
 
 ### How to Contribute
 
-We welcome [issues](https://github.com/napoles-mk-org/muuktest-orb/issues) to and [pull requests](https://github.com/napoles-mk-org/muuktest-orb/pulls) against this repository!
+We welcome [issues](https://github.com/napoles-mk/muuktest-orb/issues) to and [pull requests](https://github.com/napoles-mk/muuktest-orb/pulls) against this repository!
 
 ### How to Publish
 * Create and push a branch with your new features.
