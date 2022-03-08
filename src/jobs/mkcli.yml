@@ -22,6 +22,7 @@ parameters:
 
   t:
     type: string
+    default: ""
     description: "Test case id or hastag name"
 
   browser:
