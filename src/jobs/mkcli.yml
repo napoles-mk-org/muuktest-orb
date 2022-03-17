@@ -1,3 +1,5 @@
+version: 2.1
+
 description: >
   MuukTest Executor
   Users will be able to use MuukTest executor on Circle CI integrations
