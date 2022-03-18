@@ -30,7 +30,8 @@ executor: python/default
 
 steps:
   - checkout # check out the code in the project directory
-  - python/dist
+  - python/install-packages:
+      pkg-manager: pip
   - run:
       command: |
         apt-get update
