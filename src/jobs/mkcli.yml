@@ -10,8 +10,9 @@ docker:
 
 parameters:
   p:
-    type: string
-    default: "tag"
+    type: enum
+    default: tag
+    enum: [tag, hashtag]
     description: "Setting for tag/hastag"
 
   t:
@@ -20,12 +21,16 @@ parameters:
     description: "Test case id or hastag name"
 
   browser:
-    type: string
-    default: "chrome"
+    type: enum
+    default: chrome
+    enum: [chrome, firefox]
     description: "Select which browser to run the test on"
+
+executor: python/3.7
 
 steps:
   - checkout # check out the code in the project directory
+  - python/dist
   - run:
       command: |
         apt-get update
@@ -35,17 +40,15 @@ steps:
   - run:
       command: |
         yes "" | add-apt-repository ppa:deadsnakes/ppa || true
-        apt-get update
-        apt-get install -y python3.7
   - run: curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
-  - run: python3.7 get-pip.py
-  - run: pip3 install requests
+  - run: python get-pip.py
+  - run: pip install requests
   - run: pip install Pillow
   - run:
       command: |
         wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
         dpkg -i google-chrome-stable_current_amd64.deb
-  - run: python3.7 --version
+  - run: python --version
   - run: google-chrome -version
   - run: firefox -version
   - run: tmux -V
@@ -65,4 +68,4 @@ steps:
         chmod 755 key.pub
         sed -i 's/79.0.3945.36/85.0.4183.87/g' build.gradle
         cat build.gradle
-        python3.7 mkcli.py -p << parameters.p >> -t << parameters.t >> -browser << parameters.browser >>
+        python mkcli.py -p << parameters.p >> -t << parameters.t >> -browser << parameters.browser >>
