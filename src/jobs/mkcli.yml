@@ -26,7 +26,9 @@ parameters:
     enum: [chrome, firefox]
     description: "Select which browser to run the test on"
 
-executor: python/default
+executor:
+  name: python/default
+  tag: "3.7"
 
 steps:
   - checkout # check out the code in the project directory
