@@ -3,11 +3,10 @@ description: >
   Users will be able to use MuukTest executor on Circle CI integrations
 
 docker:
-  docker:
-    - image: muuk/muuktest_v1:0.1
-      environment:
-        GRADLE_OPTS: -Xmx1024m -XX:MaxMetaspaceSize=256m
-        GRADLE_USER_HOME: .gradle-home
+  - image: muuk/muuktest_v1:0.1
+    environment:
+      GRADLE_OPTS: -Xmx1024m -XX:MaxMetaspaceSize=256m
+      GRADLE_USER_HOME: .gradle-home
 
 parameters:
   p:
