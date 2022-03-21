@@ -27,17 +27,17 @@ parameters:
     description: "Select which browser to run the test on"
 
 steps:
-  run:
+  - run:
     command: |
-           Xvfb :99 -screen 0 1366x768x16 -nolisten tcp -fbdir /var/run > /dev/null 2>&1 &
-           export DISPLAY=:99
-           git clone https://github.com/muuklabs/executor.git
-           cd executor/
-           git checkout videoEnabled
-           printf $muuk_key > key.pub
-           cat key.pub
-           chmod 755 gradlew
-           chmod 755 key.pub
-           sed -i 's/79.0.3945.36/90.0.4430.24/g' build.gradle
-           cat build.gradle
-           python mkcli.py -p << parameters.p >> -t << parameters.t >> -browser << parameters.browser >>
+      Xvfb :99 -screen 0 1366x768x16 -nolisten tcp -fbdir /var/run > /dev/null 2>&1 &
+      export DISPLAY=:99
+      git clone https://github.com/muuklabs/executor.git
+      cd executor/
+      git checkout videoEnabled
+      printf $muuk_key > key.pub
+      cat key.pub
+      chmod 755 gradlew
+      chmod 755 key.pub
+      sed -i 's/79.0.3945.36/90.0.4430.24/g' build.gradle
+      cat build.gradle
+      python mkcli.py -p << parameters.p >> -t << parameters.t >> -browser << parameters.browser >>
