@@ -9,22 +9,22 @@ docker:
       GRADLE_USER_HOME: .gradle-home
 
 parameters:
+
+  t:
+    type: string
+    description: "Test case id or hastag name"
+
   p:
     type: enum
     default: tag
     enum: [tag, hashtag]
-    description: "Setting for tag/hastag"
-
-  t:
-    type: string
-    default: ""
-    description: "Test case id or hastag name"
+    description: "Set either tag or hastag regarding t value"
 
   browser:
     type: enum
     default: chrome
     enum: [chrome, firefox]
-    description: "Select which browser to run the test on"
+    description: "Set either from chrome or firefox to run the scritp on"
 
 steps:
   - run:
