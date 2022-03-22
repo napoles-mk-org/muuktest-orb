@@ -40,4 +40,5 @@ steps:
         chmod 755 key.pub
         sed -i 's/79.0.3945.36/90.0.4430.24/g' build.gradle
         cat build.gradle
-        /usr/local/lib/python3.7 mkcli.py -p << parameters.p >> -t << parameters.t >> -browser << parameters.browser >>
+        /usr/bin/python3.7 -m pip install --upgrade pip
+        python3 mkcli.py -p << parameters.p >> -t << parameters.t >> -browser << parameters.browser >>
