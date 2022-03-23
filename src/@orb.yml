@@ -1,11 +1,9 @@
 version: 2.1
 
 description: >
-  Sample orb description
+  Easily execute tests from MuukTest on CircleCI integration.
 
 display:
   home_url: "https://www.muuktest.com"
   source_url: "https://github.com/muuklabs/executor"
 
-orbs:
-  python: circleci/python@2.0.3

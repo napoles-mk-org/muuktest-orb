@@ -1,10 +1,11 @@
 description: >
   This example runs the test with tag TC0001. Change tag to the right value in order to run any test from your organization.
+  Prerequisites: set muuk_key environment variable under your CircleCi project settings. See link for reference: https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-project
 
 usage:
   version: 2.1
   orbs:
-    muuktest: napoles-mk/muuktest@<<pipeline.parameters.dev-orb-version>>
+    muuktest: napoles-mk/muuktest@0.0.22
   workflows:
     execute:
       jobs:
