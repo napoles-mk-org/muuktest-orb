@@ -1,13 +1,12 @@
 description: >
-  Sample example description.
-# Provide a use-case based example for using this orb.
-# Everything in the `usage` section will be displayed in the orb registry.
-# Comments are not retained.
+  This example runs the test with tag TC0001. Change tag to the right value in order to run any test from your organization.
+
 usage:
   version: 2.1
   orbs:
-    <orb-name>: <namespace>/<orb-name>@1.2.3
+    muuktest: napoles-mk/muuktest@<<pipeline.parameters.dev-orb-version>>
   workflows:
-    use-my-orb:
+    execute:
       jobs:
-        - <orb-name>/<job-name>
+       - muuktest/mkcli:
+          t: TC0001

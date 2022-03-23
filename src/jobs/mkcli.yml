@@ -1,6 +1,5 @@
 description: >
-  MuukTest Executor
-  Users will be able to use MuukTest executor on Circle CI integrations
+  MuukTest mkcli executor to execute with Circle CI on Github pull requests
 
 docker:
   - image: muuk/muuktest_v1:0.1
