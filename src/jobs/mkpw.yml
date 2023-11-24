@@ -30,10 +30,10 @@ steps:
   - run:
       name: Pass Inputs to Shell
       command: |
-        echo "MUUKTEST_KEY=${{ inputs.muuk-key }}" >> $GITHUB_ENV
-        echo "TAG_PROPERTY=${{ inputs.tag-property }}" >> $GITHUB_ENV
-        echo "TAG_VALUE=${{ inputs.tag-value }}" >> $GITHUB_ENV
-        echo "MUUKTEST_KEY=${{ inputs.muuk-key }}" >> $GITHUB_ENV
+        export MUUKTEST_KEY=<< parameters.muuk-key >>
+        export TAG_PROPERTY=<< parameters.p >>
+        export TAG_VALUE=<< parameters.t >>
+        export MUUKTEST_BROWSER=<< parameters.browser >>
         mkdir -p executor
 
   - run:
@@ -74,7 +74,7 @@ steps:
       command: |
         cd executor
         npm install -D @playwright/test
-        npx playwright install --with-deps chromium
+        npx playwright install --with-deps $MUUKTEST_BROWSER
         npm install axios
         npm install archiver
 
@@ -82,4 +82,4 @@ steps:
       name: Execute MuukTest E2E
       command: |
         cd executor
-        npx playwright test --workers=3 --project=chromium
+        npx playwright test --workers=3 --project=$MUUKTEST_BROWSER
