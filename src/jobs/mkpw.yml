@@ -1,6 +1,8 @@
-name: Integrate MuukTest E2E Playwright executor
 description: >
   MuukTest Playwright executor with Circle CI on Github pull requests
+
+docker:
+  - image: cimg/base:current
 
 parameters:
 
