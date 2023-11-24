@@ -5,7 +5,6 @@ docker:
   - image: cimg/base:stable
   
 parameters:
-
   t:
     type: string
     description: "Test case id or hastag name"
