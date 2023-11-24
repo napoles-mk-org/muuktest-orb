@@ -2,7 +2,7 @@ description: >
   MuukTest Playwright executor with Circle CI on Github pull requests
 
 docker:
-  - image: cimg/base:current
+  - image: cimg/base:stable
 
 parameters:
 
