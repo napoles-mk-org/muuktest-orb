@@ -41,7 +41,6 @@ steps:
         sed -i 's/79.0.3945.36/86.0.4240.22/g' build.gradle
         cat build.gradle
 
-steps:
   - run:
       name: Run MuukTest executor
       command: |
