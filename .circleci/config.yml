@@ -52,9 +52,9 @@ workflows:
           filters: *filters
 
       - orb-tools/publish:
-          orb-name: napoles-mk/muuktest
-          vcs-type: << pipeline.project.type >>
-          pub-type: production
+          orb_name: napoles-mk/muuktest
+          vcs_type: << pipeline.project.type >>
+          pub_type: production
           requires:
             - orb-tools/continue
           context: orb-publisher
