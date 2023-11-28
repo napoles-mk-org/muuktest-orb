@@ -4,7 +4,7 @@ export DISPLAY=:99
 git clone https://github.com/muuklabs/executor.git
 cd executor || { echo "Failure: executor directory not found!"; exit 1; }
 git checkout videoEnabled
-"$muuk_key" > key.pub
+"$MUUKTEST_KEY" > key.pub
 cat key.pub
 chmod 755 gradlew
 chmod 755 key.pub
