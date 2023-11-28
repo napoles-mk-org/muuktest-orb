@@ -2,7 +2,7 @@
 Xvfb :99 -screen 0 1366x768x16 -nolisten tcp -fbdir /var/run > /dev/null 2>&1 &
 export DISPLAY=:99
 git clone https://github.com/muuklabs/executor.git
-cd executor/
+cd executor || { echo "Failure: executor directory not found!"; exit 1; }
 git checkout videoEnabled
 "$muuk_key" > key.pub
 cat key.pub

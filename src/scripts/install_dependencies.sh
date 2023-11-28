@@ -1,5 +1,5 @@
 #!/bin/bash
-cd executor
+cd executor || { echo "Failure: executor directory not found!"; exit 1; }
 sudo apt-get update
 sudo apt-get install -y ca-certificates curl gnupg
 sudo mkdir -p /etc/apt/keyrings

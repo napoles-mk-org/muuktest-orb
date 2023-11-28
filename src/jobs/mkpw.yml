@@ -47,7 +47,7 @@ steps:
   - run:
       name: Installing PW
       command: |
-        cd executor
+        cd executor || { echo "Failure: executor directory not found!"; exit 1; }
         npm install -D @playwright/test
         npx playwright install --with-deps $MUUKTEST_BROWSER
         npm install axios
@@ -56,5 +56,5 @@ steps:
   - run:
       name: Execute MuukTest E2E
       command: |
-        cd executor
+        cd executor || { echo "Failure: executor directory not found!"; exit 1; }
         npx playwright test --workers=3 --project=$MUUKTEST_BROWSER

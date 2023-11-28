@@ -1,5 +1,5 @@
 #!/bin/bash
-cd executor
+cd executor || { echo "Failure: executor directory not found!"; exit 1; }
 printf '{ "key": "%s"}' "$MUUKTEST_KEY" > file.json
 cat file.json
 curl -H  "Content-Type: application/json" -X POST -d @file.json 'https://portal.muuktest.com:8081/generate_token_executer' -o "token.json"
