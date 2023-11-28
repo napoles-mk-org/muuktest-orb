@@ -4,7 +4,7 @@ export DISPLAY=:99
 git clone https://github.com/muuklabs/executor.git
 cd executor/
 git checkout videoEnabled
-printf $muuk_key > key.pub
+"$muuk_key" > key.pub
 cat key.pub
 chmod 755 gradlew
 chmod 755 key.pub

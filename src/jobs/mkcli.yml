@@ -25,6 +25,10 @@ parameters:
     enum: [chrome, firefox]
     description: "Set either from chrome or firefox to run the scritp on"
 
+  muuk_key:
+    type: string
+    description: "MuukTest key.pub value"
+
 steps:
   - run:
       name: Retrieve MuukTest config files and test scripts
