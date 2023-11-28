@@ -3,6 +3,11 @@ description: >
 
 docker:
   - image: cimg/base:stable
+    environment:
+      MUUKTEST_KEY: << parameters.muuk_key >>
+      TAG_PROPERTY: << parameters.p >>
+      TAG_VALUE: << parameters.t >>
+      MUUKTEST_BROWSER: << parameters.browser >>
 
 parameters:
 
@@ -28,12 +33,8 @@ parameters:
 
 steps:
   - run:
-      name: Pass Inputs to Shell
+      name: Init
       command: |
-        export MUUKTEST_KEY=<< parameters.muuk_key >>
-        export TAG_PROPERTY=<< parameters.p >>
-        export TAG_VALUE=<< parameters.t >>
-        export MUUKTEST_BROWSER=<< parameters.browser >>
         mkdir -p executor
 
   - run:
