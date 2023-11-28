@@ -42,6 +42,7 @@ workflows:
       - orb-tools/pack # Pack orb source
       - orb-tools/review:
           filters: *filters
+      - shellcheck/check
       # Triggers the next workflow in the Orb Development Kit.
       - orb-tools/continue:
           pipeline_number: << pipeline.number >>
@@ -49,4 +50,17 @@ workflows:
           orb_name: napoles-mk/muuktest
           requires: [orb-tools/lint, orb-tools/pack, orb-tools/review, shellcheck/check]
           filters: *filters
+
+      - orb-tools/publish:
+          orb-name: napoles-mk/muuktest
+          vcs-type: << pipeline.project.type >>
+          pub-type: production
+          requires:
+            - orb-tools/continue
+          context: orb-publisher
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v[0-9]+\.[0-9]+\.[0-9]+$/
 
