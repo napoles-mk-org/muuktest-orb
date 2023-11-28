@@ -22,7 +22,7 @@ parameters:
     enum: [chromium, firefox]
     description: "Set either from chrome or firefox to run the scritp on"
 
-  muuk-key:
+  muuk_key:
     type: string
     description: "MuukTest key.pub value"
 
@@ -30,7 +30,7 @@ steps:
   - run:
       name: Pass Inputs to Shell
       command: |
-        export MUUKTEST_KEY=<< parameters.muuk-key >>
+        export MUUKTEST_KEY=<< parameters.muuk_key >>
         export TAG_PROPERTY=<< parameters.p >>
         export TAG_VALUE=<< parameters.t >>
         export MUUKTEST_BROWSER=<< parameters.browser >>

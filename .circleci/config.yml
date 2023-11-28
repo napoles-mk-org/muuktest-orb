@@ -41,6 +41,7 @@ workflows:
       - orb-tools/lint # Lint Yaml files
       - orb-tools/pack # Pack orb source
       - orb-tools/review:
+          max_command_length: 200
           filters: *filters
       - shellcheck/check
       # Triggers the next workflow in the Orb Development Kit.

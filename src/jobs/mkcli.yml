@@ -27,6 +27,7 @@ parameters:
 
 steps:
   - run:
+      name: Retrieve MuukTest config files and test scripts
       command: |
         Xvfb :99 -screen 0 1366x768x16 -nolisten tcp -fbdir /var/run > /dev/null 2>&1 &
         export DISPLAY=:99
@@ -39,4 +40,10 @@ steps:
         chmod 755 key.pub
         sed -i 's/79.0.3945.36/86.0.4240.22/g' build.gradle
         cat build.gradle
+
+steps:
+  - run:
+      name: Run MuukTest executor
+      command: |
+        cd executor/
         python3.7 mkcli.py -p << parameters.p >> -t << parameters.t >> -browser << parameters.browser >>
