@@ -2,7 +2,7 @@ description: >
   MuukTest Playwright executor with Circle CI on Github pull requests
 
 docker:
-  - image: cimg/base:stable
+  - image: cimg/node:20.9
     environment:
       MUUKTEST_KEY: << parameters.muuk_key >>
       TAG_PROPERTY: << parameters.p >>
@@ -39,7 +39,7 @@ steps:
 
   - run:
       name: Installing dependencies
-      command: <<include(scripts/install_dependencies.sh)>>
+      command: sudo apt-get update && sudo apt-get install -y unzip
 
   - run:
       name: Retrieve MuukTest config files and Test scripts
@@ -53,6 +53,9 @@ steps:
         npx playwright install --with-deps $MUUKTEST_BROWSER
         npm install axios
         npm install archiver
+        npm install cheerio
+        npm install xpath
+        npm install @xmldom/xmldom
 
   - run:
       name: Execute MuukTest E2E
