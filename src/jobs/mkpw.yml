@@ -1,0 +1,57 @@
+description: >
+  MuukTest Playwright executor with Circle CI on Github pull requests
+
+docker:
+  - image: cimg/node:20.9
+    environment:
+      MUUKTEST_KEY: << parameters.muuk_key >>
+      TAG_PROPERTY: << parameters.p >>
+      TAG_VALUE: << parameters.t >>
+      MUUKTEST_BROWSER: << parameters.browser >>
+
+parameters:
+
+  t:
+    type: string
+    description: "Test case id or hastag name"
+
+  p:
+    type: enum
+    default: tag
+    enum: [tag, hashtag]
+    description: "Set either tag or hastag regarding t value"
+
+  browser:
+    type: enum
+    default: chromium
+    enum: [chromium, firefox]
+    description: "Set either from chrome or firefox to run the scritp on"
+
+  muuk_key:
+    type: string
+    description: "MuukTest key.pub value"
+
+steps:
+  - run:
+      name: Init
+      command: |
+        mkdir -p executor
+
+  - run:
+      name: Installing libraries dependencies
+      command: sudo apt-get update && sudo apt-get install -y unzip
+
+  - run:
+      name: Retrieve MuukTest config files and Test scripts
+      command: <<include(scripts/get_config_and_tests.sh)>>
+
+  - run:
+      name: Installing PW and required packages
+      command: <<include(scripts/install_pw_and_requirements.sh)>>
+
+
+  - run:
+      name: Execute MuukTest E2E
+      command: |
+        cd executor || { echo "Failure: executor directory not found!"; exit 1; }
+        npx playwright test --workers=3 --project=$MUUKTEST_BROWSER

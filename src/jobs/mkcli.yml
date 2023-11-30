@@ -1,81 +1,46 @@
-version: 2.1
-
 description: >
-  MuukTest Executor
-  Users will be able to use MuukTest executor on Circle CI integrations
-
-display:
-  home_url: "https://www.muuktest.com/"
-  source_url: "https://github.com/napoles-mk-org/muuktest-orb"
+  MuukTest mkcli executor to execute with Circle CI on Github pull requests
 
 docker:
-  - image: gebish/ci:v7
-  
-    GRADLE_OPTS: -Xmx1024m -XX:MaxMetaspaceSize=256m
-    GRADLE_USER_HOME: .gradle-home
+  - image: muuk/muuktest_v1:0.1
+    environment:
+      GRADLE_OPTS: -Xmx1024m -XX:MaxMetaspaceSize=256m
+      GRADLE_USER_HOME: .gradle-home
 
 parameters:
-  p:
-    type: string
-    default: "tag"
-    description: "Setting for tag/hastag"
 
   t:
     type: string
-    default: ""
     description: "Test case id or hastag name"
 
+  p:
+    type: enum
+    default: tag
+    enum: [tag, hashtag]
+    description: "Set either tag or hastag regarding t value"
+
   browser:
+    type: enum
+    default: chrome
+    enum: [chrome, firefox]
+    description: "Set either from chrome or firefox to run the scritp on"
+
+  muuk_key:
     type: string
-    default: "chrome"
-    description: "Select which browser to run the test"
+    description: "MuukTest key.pub value"
 
 steps:
-  - checkout # check out the code in the project directory
-  
-  - run: 
+  - run:
+      name: Pass Inputs to Shell
       command: |
-        apt-get update
-        apt-get install -y software-properties-common
-        apt-get install -y tmux
-        apt-get install -y ffmpeg
-      
-  - run: 
-      command: |
-        yes "" | add-apt-repository ppa:deadsnakes/ppa || true
-        apt-get update
-        apt install python3.7 -y
-
-  - run: curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
-  - run: python3.7 get-pip.py 
-  - run:  pip3 install requests
-  - run: pip install Pillow
-
-  - run: 
-      command: |
-        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-        dpkg -i google-chrome-stable_current_amd64.deb
-
-  - run: python3.7 --version
-  - run: google-chrome -version
-  - run: firefox -version
-  - run: tmux -V
-  - run: ffmpeg -version
+        export MUUKTEST_KEY=<< parameters.muuk_key >>
 
   - run:
-      command: |
-        Xvfb :99 -screen 0 1366x768x16 -nolisten tcp -fbdir /var/run > /dev/null 2>&1 &
-        export DISPLAY=:99
-        #export FIREFOX_VERSION=66.0.3
-        git clone https://github.com/muuklabs/executor.git
-        cd executor/
-        git checkout videoEnabled
-        ls
-        printf $muuk_key > key.pub 
-        cat key.pub
-        chmod 755 gradlew 
-        chmod 755 key.pub 
-        sed -i 's/79.0.3945.36/85.0.4183.87/g' build.gradle
-        cat build.gradle
-        python3.7 mkcli.py -p << parameters.p >> -t << parameters.t >> -browser << parameters.browser >>
+      name: Retrieve MuukTest config files and test scripts
+      command: <<include(scripts/configure_mkcli.sh)>>
 
+  - run:
+      name: Run MuukTest executor
+      command: |
+        cd executor/
+        python3.7 mkcli.py -p << parameters.p >> -t << parameters.t >> -browser << parameters.browser >>
