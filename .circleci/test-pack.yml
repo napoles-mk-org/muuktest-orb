@@ -38,7 +38,7 @@ filters: &filters
 workflows:
   # Prior to producing a development orb (which requires credentials) basic validation, linting, and even unit testing can be performed.
   # This workflow will run on every commit
-  test-pack:
+  lint-pack:
     unless: << pipeline.parameters.run-integration-tests >>
     jobs:
       - orb-tools/lint: # Lint Yaml files
@@ -58,16 +58,4 @@ workflows:
           requires: [orb-tools/lint, orb-tools/pack, orb-tools/review, shellcheck/check]
           filters: *filters
 
-      - orb-tools/publish:
-          orb_name: napoles-mk/muuktest
-          vcs_type: << pipeline.project.type >>
-          pub_type: dev
-          requires:
-            - orb-tools/continue
-          context: orb-publishing-context
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /^v[0-9]+\.[0-9]+\.[0-9]+$/
 
