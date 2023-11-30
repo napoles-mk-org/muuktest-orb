@@ -1,8 +1,11 @@
 version: 2.1
 
+# this allows you to use CircleCI's dynamic configuration feature
+setup: true
+
 orbs:
   muuktest: napoles-mk/muuktest@<<pipeline.parameters.dev-orb-version>>
-  orb-tools: circleci/orb-tools@12.0
+  orb-tools: circleci/orb-tools@12.0.4
   shellcheck: circleci/shellcheck@3.1
 
 # Pipeline Parameters
@@ -38,9 +41,14 @@ workflows:
   test-pack:
     unless: << pipeline.parameters.run-integration-tests >>
     jobs:
-      - orb-tools/lint # Lint Yaml files
-      - orb-tools/pack # Pack orb source
+      - orb-tools/lint: # Lint Yaml files
+          filters: *filters
+      - orb-tools/pack: # Pack orb source
+          filters: *filters
       - orb-tools/review:
+          max_command_length: 140
+          filters: *filters
+      - shellcheck/check:
           filters: *filters
       # Triggers the next workflow in the Orb Development Kit.
       - orb-tools/continue:
@@ -49,4 +57,5 @@ workflows:
           orb_name: napoles-mk/muuktest
           requires: [orb-tools/lint, orb-tools/pack, orb-tools/review, shellcheck/check]
           filters: *filters
+
 

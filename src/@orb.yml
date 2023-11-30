@@ -1,7 +1,7 @@
 version: 2.1
 
 description: >
-  Easily execute tests from MuukTest on CircleCI integration.
+  Easily execute tests from MuukTest on CircleCI integration. Provides jobs for executing on Selenium (using our mkcli python script) or Playwright.
 
 display:
   home_url: "https://www.muuktest.com"
