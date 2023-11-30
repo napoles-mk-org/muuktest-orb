@@ -19,7 +19,7 @@ workflows:
           filters:
             tags:
               only: /.*/
-      - orb-tools-alpha/publish:
+      - orb-tools/publish:
           name: publish_dev_test
           orb_name: circleci/orb-tools
           vcs_type: <<pipeline.project.type>>
