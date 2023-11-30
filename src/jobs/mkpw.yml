@@ -38,7 +38,7 @@ steps:
         mkdir -p executor
 
   - run:
-      name: Installing dependencies
+      name: Installing libraries dependencies
       command: sudo apt-get update && sudo apt-get install -y unzip
 
   - run:
@@ -46,16 +46,9 @@ steps:
       command: <<include(scripts/get_config_and_tests.sh)>>
 
   - run:
-      name: Installing PW
-      command: |
-        cd executor || { echo "Failure: executor directory not found!"; exit 1; }
-        npm install -D @playwright/test
-        npx playwright install --with-deps $MUUKTEST_BROWSER
-        npm install axios
-        npm install archiver
-        npm install cheerio
-        npm install xpath
-        npm install @xmldom/xmldom
+      name: Installing PW and required packages
+      command: <<include(scripts/install_pw_and_requirements.sh)>>
+
 
   - run:
       name: Execute MuukTest E2E
