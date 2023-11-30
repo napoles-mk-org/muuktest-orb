@@ -17,7 +17,7 @@ workflows:
       - orb-tools/publish:
           orb_name: napoles-mk/muuktest
           vcs_type: << pipeline.project.type >>
-          pub_type: dev
+          pub_type: production
           requires:
             - command-tests
           context: orb-publishing-context
