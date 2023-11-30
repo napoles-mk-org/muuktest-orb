@@ -23,6 +23,7 @@ workflows:
           name: publish_dev_test
           attach_workspace: false
           orb_name: circleci/orb-tools
+          orb_dir: src
           vcs_type: <<pipeline.project.type>>
           pub_type: dev
           requires:
@@ -30,6 +31,7 @@ workflows:
           context: orb-publishing
       - orb-tools/publish:
           orb_name: napoles-mk/muuktest
+          orb_dir: src
           attach_workspace: false
           vcs_type: << pipeline.project.type >>
           pub_type: production
