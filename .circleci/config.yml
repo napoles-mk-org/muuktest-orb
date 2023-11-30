@@ -1,5 +1,8 @@
 version: 2.1
 
+# this allows you to use CircleCI's dynamic configuration feature
+setup: true
+
 orbs:
   muuktest: napoles-mk/muuktest@<<pipeline.parameters.dev-orb-version>>
   orb-tools: circleci/orb-tools@12.0.4
