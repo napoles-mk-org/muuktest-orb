@@ -27,7 +27,7 @@ workflows:
           pub_type: dev
           requires:
             - command-tests
-          context: orb-publisher
+          context: orb-publishing
       - orb-tools/publish:
           orb_name: napoles-mk/muuktest
           attach_workspace: false
@@ -35,7 +35,7 @@ workflows:
           pub_type: production
           requires:
             - publish_dev_test
-          context: orb-publisher
+          context: orb-publishing
           filters:
             branches:
               ignore: /.*/
