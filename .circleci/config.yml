@@ -32,5 +32,7 @@ workflows:
           orb_name: napoles-mk/muuktest
           requires: [orb-tools/lint, orb-tools/pack, orb-tools/review, shellcheck/check]
           filters: *filters
+          pre-steps:
+            - checkout
 
 
