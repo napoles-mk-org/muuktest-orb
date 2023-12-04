@@ -1,0 +1,19 @@
+description: |
+  This example executes all the tests with the hashtag '#deployment' (notice the # char should not be included on the command).
+  Prerequisites: set an environment variable under your CircleCi project settings with your organization key. Use name of variable as muuk_key input parameter, you not need to set is variable is named as default: MUUK_KEY.
+  Please see the following link for reference: https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-project
+  Want to know which is your organization key? No problem, see the next link for reference:
+  https://muuklabs.zendesk.com/hc/en-us/articles/4408400288787-Portal-Account
+
+usage:
+  version: 2.1
+  orbs:
+    muuktest: muuklabs/muuktest@2.0.0
+  workflows:
+    execute:
+      jobs:
+        - muuktest/mkcli:
+            p: hashtag
+            t: deployment
+            browser: firefox
+            muuk_key: $MUUK_KEY

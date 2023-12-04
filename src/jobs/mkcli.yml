@@ -1,5 +1,5 @@
 description: >
-  MuukTest mkcli executor to execute with Circle CI on Github pull requests
+  MuukTest mkcli executor to execute with Circle CI on Github pull requests.
 
 docker:
   - image: muuk/muuktest_v1:0.1
@@ -11,29 +11,30 @@ parameters:
 
   t:
     type: string
-    description: "Test case id or hastag name"
+    description: "Test case id or hastag name."
 
   p:
     type: enum
     default: tag
     enum: [tag, hashtag]
-    description: "Set either tag or hastag regarding t value"
+    description: "Set either tag or hashtag according value on t parameter."
 
   browser:
     type: enum
     default: chrome
     enum: [chrome, firefox]
-    description: "Set either from chrome or firefox to run the scritp on"
+    description: "Set either from chrome or firefox to run the script on."
 
   muuk_key:
-    type: string
-    description: "MuukTest key.pub value"
+    default: MUUKTEST_KEY
+    description: "Name of the env var with your MuukTest key.pub account value. This var should be set on CircleCi settings."
+    type: env_var_name
 
 steps:
   - run:
       name: Pass Inputs to Shell
       command: |
-        export MUUKTEST_KEY=<< parameters.muuk_key >>
+        MUUKTEST_KEY_INTERNAL=${<< parameters.muuk_key >>}
 
   - run:
       name: Retrieve MuukTest config files and test scripts

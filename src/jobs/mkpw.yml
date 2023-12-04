@@ -1,41 +1,45 @@
 description: >
-  MuukTest Playwright executor with Circle CI on Github pull requests
+  MuukTest Playwright executor with Circle CI on Github pull requests.
 
 docker:
   - image: cimg/node:20.9
     environment:
-      MUUKTEST_KEY: << parameters.muuk_key >>
-      TAG_PROPERTY: << parameters.p >>
-      TAG_VALUE: << parameters.t >>
+      MUUKTEST_TAG_PROPERTY: << parameters.p >>
+      MUUKTEST_TAG_VALUE: << parameters.t >>
       MUUKTEST_BROWSER: << parameters.browser >>
 
 parameters:
 
   t:
     type: string
-    description: "Test case id or hastag name"
+    description: "Test case id or hashtag name."
 
   p:
     type: enum
     default: tag
     enum: [tag, hashtag]
-    description: "Set either tag or hastag regarding t value"
+    description: "Set either tag or hastag according value on t parameter."
 
   browser:
     type: enum
     default: chromium
     enum: [chromium, firefox]
-    description: "Set either from chrome or firefox to run the scritp on"
+    description: "Set either from chrome or firefox to run the script on."
 
   muuk_key:
-    type: string
-    description: "MuukTest key.pub value"
+    default: MUUKTEST_KEY
+    description: "Name of the env var with your MuukTest key.pub account value. This var should be set on CircleCi settings."
+    type: env_var_name
 
 steps:
   - run:
       name: Init
       command: |
         mkdir -p executor
+        cd executor
+        MUUKTEST_KEY_INTERNAL=${<< parameters.muuk_key >>}
+        printf '{ "key": "%s"}' "$MUUKTEST_KEY_INTERNAL" > file.json
+        cat file.json
 
   - run:
       name: Installing libraries dependencies
@@ -43,7 +47,7 @@ steps:
 
   - run:
       name: Retrieve MuukTest config files and Test scripts
-      command: <<include(scripts/get_config_and_tests.sh)>>
+      command: <<include(scripts/get_pw_config_and_tests.sh)>>
 
   - run:
       name: Installing PW and required packages
